@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody>();
         myRigidBody.freezeRotation = true;
+
+        moveSpeed = 10;
     }
 
     private void Update()
