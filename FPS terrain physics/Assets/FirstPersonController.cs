@@ -26,6 +26,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float snowLowerDivision = 1.4f;
     [SerializeField] private float snowUpperDivision = 2.5f;
     private bool isOnSnow;
+    //
+    private float energyTimer;
 
     [Header("Movement Parameters")]
     private float currentSpeed;
@@ -52,7 +54,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float sprintBobSpeed = 18f;
     [SerializeField] private float sprintBobAmount = 0.1f;
     private float defaultYPos = 0;
-    private float timer;
+    private float bobTimer;
 
     private Camera playerCamera;
     private CharacterController characterController;
@@ -119,8 +121,9 @@ public class FirstPersonController : MonoBehaviour
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
-            canSprint = false;
             canJump = false;
+            if(Input.GetKeyDown(sprintKey))
+                canSprint = false;
         }
         else
         {
@@ -136,9 +139,9 @@ public class FirstPersonController : MonoBehaviour
         if (!characterController.isGrounded) return;
         if (Mathf.Abs(moveDirection.x) > 0.1 || Mathf.Abs(moveDirection.z) > 0.1f)
         {
-            timer += Time.deltaTime * bobSpeed;
+            bobTimer += Time.deltaTime * bobSpeed;
             playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x,
-                defaultYPos + Mathf.Sin(timer) * bobAmount, playerCamera.transform.localPosition.z);
+                defaultYPos + Mathf.Sin(bobTimer) * bobAmount, playerCamera.transform.localPosition.z);
         }
     }
 
