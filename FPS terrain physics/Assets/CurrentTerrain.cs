@@ -6,29 +6,23 @@ public class CurrentTerrain : MonoBehaviour
 {
     public FirstPersonController playerScript;
 
+    private GameObject floorObject;
     private BoxCollider floorCollider;
+
     private CapsuleCollider playerCollider;
-   // private GameObject playerObject;
+    public GameObject playerObject;
+    public bool changeSpeed;
 
     void Start()
     {
-        floorCollider = GetComponent<BoxCollider>();
-        playerCollider = playerScript.GetComponentInChildren<CapsuleCollider>();
+        floorObject = GameObject.FindGameObjectWithTag("Terrain");
+        floorCollider = floorObject.GetComponent<BoxCollider>();
 
-      //  playerObject = playerCollider.GetComponentInParent<GameObject>();
+        playerCollider = playerScript.GetComponentInChildren<CapsuleCollider>();
     }
 
     private void Update()
-    { 
-        Debug.Log(playerCollider);
-      //  Debug.Log(playerObject.name);
-
-        if (playerCollider.name == "PlayerObject")
-            Debug.Log("Working");
-    }
-
-    private void OnCollisionEnter(Collision collision)
     {
-        //if(collision.gameObject == )
+        //
     }
 }

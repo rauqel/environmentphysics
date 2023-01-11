@@ -6,6 +6,10 @@ public class FirstPersonController : MonoBehaviour
 {
     public bool canMove { get; private set; } = true;
 
+    [Header("References")]
+    private GameObject playerObject;
+    public CurrentTerrain terrainScript;
+
     [Header("Functional Booleans")]
     private bool canSprint;
     private bool canJump;
@@ -66,6 +70,8 @@ public class FirstPersonController : MonoBehaviour
 
     void Awake()
     {
+        playerObject = GetComponentInChildren<GameObject>();
+
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
 

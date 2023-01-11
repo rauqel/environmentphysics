@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 113516342}
   m_Layer: 0
   m_Name: Floor (2)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,6 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1399066854}
+  playerObject: {fileID: 275173423}
+  changeSpeed: 0
 --- !u!1 &275173423
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +579,7 @@ GameObject:
   - component: {fileID: 367964219}
   m_Layer: 0
   m_Name: Floor (3)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -901,13 +903,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1399066854}
+  playerObject: {fileID: 275173423}
+  changeSpeed: 0
 --- !u!43 &470268668
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17346
+  m_Name: pb_Mesh17334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1065,13 +1069,59 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &624488247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 624488249}
+  - component: {fileID: 624488248}
+  m_Layer: 0
+  m_Name: TerrainController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &624488248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624488247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd64ae0c7d595f8439610ab20198c442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 1399066854}
+  playerObject: {fileID: 275173423}
+  changeSpeed: 0
+--- !u!4 &624488249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624488247}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.34468, y: -2.2791061, z: 43.158684}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &669629862
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17300
+  m_Name: pb_Mesh17284
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1746,6 +1796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1399066854}
+  playerObject: {fileID: 275173423}
+  changeSpeed: 0
 --- !u!1 &1087257138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,7 +1815,7 @@ GameObject:
   - component: {fileID: 1087257139}
   m_Layer: 0
   m_Name: Floor (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1781,6 +1833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1399066854}
+  playerObject: {fileID: 275173423}
+  changeSpeed: 0
 --- !u!65 &1087257140
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2117,6 +2171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67483c157ae352a46860f82439fcb366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainScript: {fileID: 0}
   grassLowerDivision: 1
   grassUpperDivision: 2
   isOnGrass: 0
@@ -2178,7 +2233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17276
+  m_Name: pb_Mesh17258
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2342,7 +2397,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17332
+  m_Name: pb_Mesh17318
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
