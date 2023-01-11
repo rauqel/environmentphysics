@@ -8,16 +8,20 @@ public class CurrentTerrain : MonoBehaviour
 
     private BoxCollider floorCollider;
     private CapsuleCollider playerCollider;
+   // private GameObject playerObject;
 
     void Start()
     {
         floorCollider = GetComponent<BoxCollider>();
         playerCollider = playerScript.GetComponentInChildren<CapsuleCollider>();
+
+      //  playerObject = playerCollider.GetComponentInParent<GameObject>();
     }
 
     private void Update()
-    {
+    { 
         Debug.Log(playerCollider);
+      //  Debug.Log(playerObject.name);
 
         if (playerCollider.name == "PlayerObject")
             Debug.Log("Working");
@@ -25,6 +29,6 @@ public class CurrentTerrain : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == )
+        //if(collision.gameObject == )
     }
 }
