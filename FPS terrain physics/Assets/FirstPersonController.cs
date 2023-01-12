@@ -19,9 +19,30 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Movement Parameters")]
     private float currentSpeed;
-    private float walkSpeed = 4.5f;
+    private float walkSpeed = 45f;
     private float sprintSpeed = 7f;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+
+    [Header("Terrain Parameters")]
+    private float currentLowerDivision, currentUpperDivision;
+    [SerializeField] private float grassLowerDivision = 1.0f;
+    [SerializeField] private float grassUpperDivision = 2.0f;
+    public bool isOnGrass;
+    //
+    [SerializeField] private float sandLowerDivision = 1.75f;
+    [SerializeField] private float sandUpperDivision = 3;
+    public bool isOnSand;
+    //
+    [SerializeField] private float snowLowerDivision = 1.4f;
+    [SerializeField] private float snowUpperDivision = 2.5f;
+    public bool isOnSnow;
+    //
+    private float energyTimer;
+    private bool canChange;
+    //
+    [SerializeField] private LayerMask grassFloor;
+    [SerializeField] private LayerMask snowFloor;
+    [SerializeField] private LayerMask sandFloor;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float lookSpeedX = 2.0f;
@@ -72,6 +93,8 @@ public class FirstPersonController : MonoBehaviour
             HandleMovementInput();
             HandleMouseLook();
 
+            HandleTerrainMovement();
+
             HandleHeadBob();
 
             if (canJump)
@@ -104,6 +127,17 @@ public class FirstPersonController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
+    }
+
+    private void HandleTerrainMovement()
+    {
+        //if (characterController.isGrounded)
+        isOnGrass = Physics.Raycast(transform.position, Vector3.down,  1 * 0.5f + 0.2f, grassFloor);
+
+        if (isOnGrass)
+        {
+            Debug.Log("Hey");
+        }
     }
 
     private void ApplyFinalMovements()

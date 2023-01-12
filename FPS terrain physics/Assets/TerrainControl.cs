@@ -4,27 +4,17 @@ using UnityEngine;
 
 public class TerrainControl : MonoBehaviour
 {
-    [Header("Terrain Parameters")]
-    private float currentLowerDivision;
-    private float currentUpperDivision;
-    [SerializeField] private float grassLowerDivision = 1.0f;
-    [SerializeField] private float grassUpperDivision = 2.0f;
-    public bool isOnGrass;
-    //
-    [SerializeField] private float sandLowerDivision = 1.75f;
-    [SerializeField] private float sandUpperDivision = 3;
-    public bool isOnSand;
-    //
-    [SerializeField] private float snowLowerDivision = 1.4f;
-    [SerializeField] private float snowUpperDivision = 2.5f;
-    public bool isOnSnow;
-    //
-    private float energyTimer;
-    private bool canChange;
+    [SerializeField] private LayerMask grassFloor;
+    private bool isOnGrass;
 
-    private void OnCollisionStay(Collision collision)
+
+    private void Update()
     {
-        if (collision.gameObject.tag == "Player")
-            Debug.Log("Working");
+        isOnGrass = Physics.Raycast(transform.position, Vector3.down, 1 * 0.5f + 0.2f, grassFloor);
+
+        if (isOnGrass)
+        {
+            Debug.Log("hey");
+        }
     }
 }
