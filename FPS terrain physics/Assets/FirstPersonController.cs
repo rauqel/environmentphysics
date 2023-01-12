@@ -7,8 +7,7 @@ public class FirstPersonController : MonoBehaviour
     public bool canMove { get; private set; } = true;
 
     [Header("References")]
-    private GameObject playerObject;
-    public CurrentTerrain terrainScript;
+
 
     [Header("Functional Booleans")]
     private bool canSprint;
@@ -18,25 +17,10 @@ public class FirstPersonController : MonoBehaviour
     private KeyCode sprintKey = KeyCode.LeftShift;
     private KeyCode jumpKey = KeyCode.Space;
 
-    [Header("Terrain Parameters")]
-    [SerializeField] private float grassLowerDivision = 1.0f;
-    [SerializeField] private float grassUpperDivision = 2.0f;
-    public bool isOnGrass;
-    //
-    [SerializeField] private float sandLowerDivision = 1.75f;
-    [SerializeField] private float sandUpperDivision = 3;
-    public bool isOnSand;
-    //
-    [SerializeField] private float snowLowerDivision = 1.4f;
-    [SerializeField] private float snowUpperDivision = 2.5f;
-    public bool isOnSnow;
-    //
-    private float energyTimer;
-
     [Header("Movement Parameters")]
     private float currentSpeed;
-    [SerializeField] private float walkSpeed = 3.0f;
-    [SerializeField] private float sprintSpeed = 6.0f;
+    private float walkSpeed = 4.5f;
+    private float sprintSpeed = 7f;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
 
     [Header("Look Parameters")]
@@ -70,7 +54,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Awake()
     {
-        playerObject = GetComponentInChildren<GameObject>();
+        //playerObject = GetComponentInChildren<GameObject>();
 
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
