@@ -26,9 +26,11 @@ public class FirstPersonController : MonoBehaviour
     private float walkSpeed = 4.5f;
     private float sprintSpeed = 9f;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    //
+    private bool isMoving;
 
     [Header("Terrain Parameters")]
-    private float currentLowerDivision, currentUpperDivision;
+    private float currentLowerDivision, currentUpperDivision, currentDivision;
     [SerializeField] private float grassLowerDivision = 1.0f;
     [SerializeField] private float grassUpperDivision = 2.0f;
     public bool isOnGrass;
@@ -70,8 +72,12 @@ public class FirstPersonController : MonoBehaviour
     private float bobTimer;
 
     private Camera playerCamera;
+    [SerializeField] private GameObject playerObject;
+    private Rigidbody playerRB;
     private CharacterController characterController;
 
+
+    private float currentVel;
     private Vector3 moveDirection;
     private Vector2 currentInput;
 
@@ -79,7 +85,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Awake()
     {
-        //playerObject = GetComponentInChildren<GameObject>();
+        playerRB = playerObject.GetComponent<Rigidbody>();
 
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
@@ -88,6 +94,8 @@ public class FirstPersonController : MonoBehaviour
         Cursor.visible = false;
 
         defaultYPos = playerCamera.transform.localPosition.y;
+
+        currentVel = playerRB.sleepThreshold;
     }
 
     void Update()
@@ -100,6 +108,7 @@ public class FirstPersonController : MonoBehaviour
             HandleTerrainMovement();
 
             HandleHeadBob();
+            HandleUI();
 
             if (canJump)
             {
@@ -109,7 +118,8 @@ public class FirstPersonController : MonoBehaviour
             ApplyFinalMovements();
         }
 
-        currentSpeed = (isSprinting ? sprintSpeed : walkSpeed);
+        currentSpeed = (isOnGrass || isOnSnow || isOnSand ? (isSprinting ? sprintSpeed / currentDivision : walkSpeed / currentDivision) :
+            (isSprinting ? sprintSpeed : walkSpeed));
 
         bobSpeed = (isSprinting ? sprintBobSpeed : walkBobSpeed);
         bobAmount = (isSprinting ? sprintBobAmount : walkBobAmount);
@@ -139,29 +149,44 @@ public class FirstPersonController : MonoBehaviour
         isOnSnow = Physics.Raycast(transform.position, Vector3.down, 2 * 0.5f + 0.2f, snowFloor);
         isOnSand = Physics.Raycast(transform.position, Vector3.down, 2 * 0.5f + 0.2f, sandFloor);
 
-        currentSpeed /= (isOnGrass ? grassLowerDivision : 
-            isOnSnow ? snowLowerDivision : 
-            isOnSand ? sandLowerDivision : 
-            1);
-
         //
         if (isOnGrass)
         {
             isOnSnow = false;
             isOnSand = false;
+            currentLowerDivision = grassLowerDivision;
+            currentUpperDivision = grassUpperDivision;
         }
         if (isOnSand)
         {
-            Debug.Log(currentSpeed);
             isOnSnow = false;
             isOnGrass = false;
+            currentLowerDivision = sandLowerDivision;
+            currentUpperDivision = sandUpperDivision;
         }
         if (isOnSnow)
         {
-           // Debug.Log("Hey");
-            Debug.Log(currentSpeed);
             isOnGrass = false;
             isOnSand = false;
+            currentLowerDivision = snowLowerDivision;
+            currentUpperDivision = snowUpperDivision;
+        }
+    }
+
+    private void CalculateTerrainSpeeds()
+    {
+        if (isMoving)
+        {
+            currentDivision = currentLowerDivision;
+            currentDivision += Time.deltaTime / (isSprinting ? 30 : 70);
+            if (currentDivision >= currentUpperDivision)
+                currentDivision = currentUpperDivision;
+        }
+        if (!isMoving)
+        {
+            currentDivision -= Time.deltaTime / 140;
+            if (currentDivision <= currentLowerDivision)
+                currentDivision = currentLowerDivision;
         }
     }
 
@@ -204,6 +229,34 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleUI()
     {
-       // if(gameObject.iss)
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            isMoving = true;
+        }
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        {
+            isMoving = false;
+        }
+
+        if (isMoving)
+        {
+            energyBar.fillAmount -= Time.deltaTime / (isSprinting ? 30 : 70);
+        }
+        else
+        {
+            if (energyBar.fillAmount != 1)
+            {
+                energyTimer += Time.deltaTime;
+            }
+            else
+            {
+                energyTimer = 0;
+            }
+
+            if (energyTimer > 3f)
+            {
+                energyBar.fillAmount += Time.deltaTime / 140;
+            }
+        }
     }
 }

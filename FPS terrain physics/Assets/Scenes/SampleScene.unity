@@ -877,7 +877,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17334
+  m_Name: pb_Mesh17354
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1041,7 +1041,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17282
+  m_Name: pb_Mesh17276
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1298,7 +1298,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17316
+  m_Name: pb_Mesh17336
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1815,9 +1815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed326fc6177e0bb4fb4ac8d78f7cac61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassFloor:
-    m_Bits: 0
-  isOnGrass: 0
 --- !u!33 &1026181280
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -2497,14 +2494,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67483c157ae352a46860f82439fcb366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyBar: {fileID: 0}
+  energyBar: {fileID: 872576915}
   grassLowerDivision: 1
   grassUpperDivision: 2
   isOnGrass: 0
   sandLowerDivision: 1.75
   sandUpperDivision: 3
   isOnSand: 0
-  snowLowerDivision: 50
+  snowLowerDivision: 1.4
   snowUpperDivision: 2.5
   isOnSnow: 0
   grassFloor:
@@ -2526,6 +2523,7 @@ MonoBehaviour:
   walkBobAmount: 0.035
   sprintBobSpeed: 17
   sprintBobAmount: 0.075
+  playerObject: {fileID: 1399066853}
 --- !u!143 &1399066855
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2596,7 +2594,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17256
+  m_Name: pb_Mesh17252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -6,8 +6,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638089581071133791
-    m_Hash: 1896279383
+      ticks: 638088525189425961
+    m_Hash: 680948862
   m_LockFileStatus:
     m_FilePath: C:/Users/ralfonso2021/Documents/GitHub/environmentphysics/FPS terrain
       physics/Packages/packages-lock.json
@@ -15,8 +15,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638089581071133791
-    m_Hash: 2464437117
+      ticks: 638088525189455333
+    m_Hash: 1473375489
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -494,7 +494,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: 'Build, edit, and texture custom geometry in Unity. Use ProBuilder
         for in-scene level design, prototyping, collision meshes, all with on-the-fly
         play-testing.
@@ -612,7 +612,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
