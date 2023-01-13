@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
     public bool canMove { get; private set; } = true;
 
     [Header("References")]
-
+    //
 
     [Header("Functional Booleans")]
     private bool canSprint;
@@ -17,10 +18,13 @@ public class FirstPersonController : MonoBehaviour
     private KeyCode sprintKey = KeyCode.LeftShift;
     private KeyCode jumpKey = KeyCode.Space;
 
+    [Header("UI control")]
+    [SerializeField] private Image energyBar;
+
     [Header("Movement Parameters")]
     private float currentSpeed;
-    private float walkSpeed = 45f;
-    private float sprintSpeed = 7f;
+    private float walkSpeed = 4.5f;
+    private float sprintSpeed = 9f;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
 
     [Header("Terrain Parameters")]
@@ -131,12 +135,33 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleTerrainMovement()
     {
-        //if (characterController.isGrounded)
-        isOnGrass = Physics.Raycast(transform.position, Vector3.down,  1 * 0.5f + 0.2f, grassFloor);
+        isOnGrass = Physics.Raycast(transform.position, Vector3.down,  2 * 0.5f + 0.2f, grassFloor);
+        isOnSnow = Physics.Raycast(transform.position, Vector3.down, 2 * 0.5f + 0.2f, snowFloor);
+        isOnSand = Physics.Raycast(transform.position, Vector3.down, 2 * 0.5f + 0.2f, sandFloor);
 
+        currentSpeed /= (isOnGrass ? grassLowerDivision : 
+            isOnSnow ? snowLowerDivision : 
+            isOnSand ? sandLowerDivision : 
+            1);
+
+        //
         if (isOnGrass)
         {
-            Debug.Log("Hey");
+            isOnSnow = false;
+            isOnSand = false;
+        }
+        if (isOnSand)
+        {
+            Debug.Log(currentSpeed);
+            isOnSnow = false;
+            isOnGrass = false;
+        }
+        if (isOnSnow)
+        {
+           // Debug.Log("Hey");
+            Debug.Log(currentSpeed);
+            isOnGrass = false;
+            isOnSand = false;
         }
     }
 
@@ -175,5 +200,10 @@ public class FirstPersonController : MonoBehaviour
         {
             moveDirection.y = jumpForce;
         }
+    }
+
+    private void HandleUI()
+    {
+       // if(gameObject.iss)
     }
 }
